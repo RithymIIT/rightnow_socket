@@ -1,5 +1,6 @@
 let app = require('express');
 let http = require('http').Server(app);
+var cors = require('cors');
 //let io = require('socket.io')(http);
 const allowedOrigins = [
    'capacitor://localhost',
