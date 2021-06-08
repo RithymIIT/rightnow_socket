@@ -44,3 +44,5 @@ var port = process.env.PORT || 3001;
 http.listen(port, function(){
    console.log('socket running on port :' + port);
 });
+
+module.exports = app;
