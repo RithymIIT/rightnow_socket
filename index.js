@@ -1,13 +1,8 @@
-let express = require('express');
-let app = express();
+let app = require('express');
 let http = require('http').Server(app);
 var cors = require('cors');
-//let io = require('socket.io')(http);
-
+let io = require('socket.io')(http);
  
- app.get('/', cors(corsOptions), (req, res, next) => {
-   res.json({ message: 'This route is CORS-enabled for an allowed origin.' });
- })
 io.on('connection', function(socket) {
   console.log('A user connected');
 
