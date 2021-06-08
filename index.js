@@ -1,6 +1,7 @@
 let app = require('express')();
 let http = require('http').Server(app);
-let io = require('socket.io')(http);
+let io = require('socket.io').listen(http);
+
  
 io.on('connection', function(socket) {
   console.log('A user connected');
