@@ -1,7 +1,8 @@
 let app = require('express');
 let http = require('http').Server(app);
-var cors = require('cors');
-let io = require('socket.io')(http);
+const options = { cors: { origin: '*', }, }; 
+let io = require('socket.io')(http, options);
+
  
 io.on('connection', function(socket) {
   console.log('A user connected');
@@ -22,5 +23,3 @@ var port = process.env.PORT || 3001;
 http.listen(port, function(){
    console.log('socket running on port :' + port);
 });
-
-module.exports = app;
