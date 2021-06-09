@@ -1,7 +1,7 @@
 let app = require('express');
 let http = require('http').Server(app);
 const options = { cors: { origin: '*', }, }; 
-let io = require('socket.io')(http, options);
+let io = require('socket.io')(http, { origins: '*:*'});
 
  
 io.on('connection', function(socket) {
