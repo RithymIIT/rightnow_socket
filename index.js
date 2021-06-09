@@ -3,7 +3,7 @@ let http = require('http').Server(app);
 const options = { cors: { origin: '*', }, }; 
 let io = require('socket.io')(http);
 
-io.origins('*:*')
+//io.origins('*:*')
 io.on('connection', function(socket) {
   console.log('A user connected');
   socket.on('disconnect', function(){
