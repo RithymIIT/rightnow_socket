@@ -31,7 +31,7 @@ io.on('connection', function(socket) {
 // });
 
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3001;
  
 http.listen(port, function(){
    console.log('socket running on port :' + port);
