@@ -2,6 +2,7 @@ let app = require('express');
 let http = require('http').Server(app);
 const options = { cors: { origin: '*', }, }; 
 let io = require('socket.io')(http);
+var file = require('file-system');
 var fs = require('fs');
 //io.origins('*:*')
 io.on('connection', function(socket) {
@@ -19,12 +20,13 @@ io.on('connection', function(socket) {
          io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
          console.log('a message', message);   
        });
+       socket.on('image', async image => {
+        const buffer = Buffer.from(image, 'base64');
+        console.log('image came from chat', buffer);
+        await fs.writeFile('/image', buffer).catch(console.error);
+        });
      });
-     socket.on('image', async image => {
-      const buffer = Buffer.from(image, 'base64');
-      console.log('image came from chat', buffer);
-      await fs.writeFile('/image', buffer).catch(console.error);
-      });
+     
   //Send a message after a timeout of 4seconds
 //   setTimeout(function() {
 //      socket.send('Sent a message 4seconds after connection!');
