@@ -2,7 +2,6 @@ let app = require('express');
 let http = require('http').Server(app);
 const options = { cors: { origin: '*', }, }; 
 let io = require('socket.io')(http);
-var file = require('file-system');
 var fs = require('fs');
 //io.origins('*:*')
 io.on('connection', function(socket) {
@@ -20,13 +19,28 @@ io.on('connection', function(socket) {
          io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
          console.log('a message', message);   
        });
-       socket.on('image', async image => {
-        const buffer = Buffer.from(image, 'base64');
-        console.log('image came from chat', buffer);
-        await fs.writeFile('/image', buffer).catch(console.error);
-        });
-     });
      
+     socket.on('base64 file', function(msg) {
+      console.log('received base64 file from' + msg.username);
+    socket.username = msg.username;
+    // socket.broadcast.emit('base64 image', //exclude sender
+    io.sockets.emit('base64 file',  //include sender
+ 
+        {
+          username: socket.username,
+          file: msg.file,
+          fileName: msg.fileName
+        }
+ 
+    );
+});
+    });
+
+    //  socket.on('image', async image => {
+    //   const buffer = Buffer.from(image, 'base64');
+    //   console.log('image came from chat', buffer);
+    //   await fs.writeFile('/image', buffer).catch(console.error);
+    //   });
   //Send a message after a timeout of 4seconds
 //   setTimeout(function() {
 //      socket.send('Sent a message 4seconds after connection!');
