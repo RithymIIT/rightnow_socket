@@ -27,9 +27,11 @@ io.on('connection', function(socket) {
     io.sockets.emit('base64 file',  //include sender
  
         {
-          username: socket.username,
+          from: socket.nickname,
           file: msg.file,
-          fileName: msg.fileName
+          fileName: msg.fileName,
+          created: new Date()
+
         }
  
     );
