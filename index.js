@@ -16,7 +16,12 @@ io.on('connection', function(socket) {
        });
        
        socket.on('add-message', (message) => {
-         io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
+         if(message.type === 'message'){
+         io.emit('message', {text: message.text, from: socket.nickname, created: new Date(), type: "message"});
+         }
+         else {
+          io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: new Date(), type: "image"});
+         }
          console.log('a message', message);   
        });
      
