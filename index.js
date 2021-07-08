@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
          else {
           io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: new Date(), type: "image"});
          }
-         console.log('a message', message);   
+         console.log('a message', message.from);   
        });
      
      socket.on('base64 file', function(msg) {
