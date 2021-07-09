@@ -17,13 +17,13 @@ io.on('connection', function(socket) {
        
        socket.on('add-message', (message) => {
          if(message.type === 'message'){
-         io.emit('message', {text: message.text, from: socket.nickname, created: new Date(), type: "message"});
+         io.emit('message', {text: message.text, from: socket.nickname, created: Date.now(), type: "message"});
          }
          else if(message.type === 'image') {
-          io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: new Date(), type: "image"});
+          io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: Date.now(), type: "image"});
          }
          else if(message.type === 'sticker' || message.type === 'Gifs') {
-          io.emit('message', {pic: message.pic, from: socket.nickname, created: new Date(), type: "sticker"});
+          io.emit('message', {pic: message.pic, from: socket.nickname, created: Date.now(), type: "sticker"});
          }
          console.log('a message', message.username);   
        });
