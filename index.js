@@ -19,8 +19,11 @@ io.on('connection', function(socket) {
          if(message.type === 'message'){
          io.emit('message', {text: message.text, from: socket.nickname, created: new Date(), type: "message"});
          }
-         else {
+         else if(message.type === 'image') {
           io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: new Date(), type: "image"});
+         }
+         else if(message.type === 'sticker') {
+          io.emit('message', {pic: message.pic, from: socket.nickname, created: new Date(), type: "sticker"});
          }
          console.log('a message', message.username);   
        });
