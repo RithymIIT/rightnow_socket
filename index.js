@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
          else if(message.type === 'image') {
           io.emit('message', {fileName: message.fileName, file: message.file, from: socket.nickname, created: new Date(), type: "image"});
          }
-         else if(message.type === 'sticker') {
+         else if(message.type === 'sticker' || message.type === 'Gifs') {
           io.emit('message', {pic: message.pic, from: socket.nickname, created: new Date(), type: "sticker"});
          }
          console.log('a message', message.username);   
